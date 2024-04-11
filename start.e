@@ -1,1 +1,1 @@
-nohup python ./mail-d/main.py 0 &
+nohup python ./main.py 0 &
