@@ -7,13 +7,14 @@ from datetime import datetime
 import threading
 import time
 import os
-
+import sys
 
 #tocken, group chat id and mine chat id
 chatid = -1001851749239 
 rockxi = 316009566
+prodtype = sys.argv[1]
 
-chatid = rockxi
+
 
 token = '7186213219:AAFgSnkq1lDpUeyKVOZjl_PuRTScOWlaVhg'
 mail_pass = "3jG402P7cqVd587Fdv1L"
@@ -31,6 +32,8 @@ bot = tg.TeleBot(token)
 imap = imaplib.IMAP4_SSL(imap_server)
 imap.login(username, mail_pass)
 
+if prodtype == '1':
+    chatid = rockxi
 
 
 #main function that check email and send last mail to tg group
