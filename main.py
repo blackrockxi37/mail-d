@@ -107,14 +107,17 @@ def ThreadMailReader():
 
 @bot.message_handler()
 def messahe_handler(message):
-    print(message.from_user.username, ", ", message.chat.id, " : ", message.text.strip())
+    if message.chat.id == 316009566:
+        bot.send_message(316009566, "Работает.")
+        print(message.from_user.username, ", ", message.chat.id, " : ", message.text.strip())
 
 t1 = threading.Thread(target=ThreadMailReader, daemon=True)
 t1.start() 
 
 
 try:
-    ans = input("Нажмите Ctrl + С чтобы выйти.\n")
+    ans = print("Нажмите Ctrl + С чтобы выйти.\n")
+    bot.polling()
 except KeyboardInterrupt:
     print("Ctrl + С")
     flag = False
