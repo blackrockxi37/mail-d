@@ -15,6 +15,7 @@ chatid = -1001851749239
 token = '7186213219:AAFgSnkq1lDpUeyKVOZjl_PuRTScOWlaVhg'
 flag = True
 notyflag = False
+getMail_status = 0
 bot = tg.TeleBot(token)
 
 mail_pass = "3jG402P7cqVd587Fdv1L"

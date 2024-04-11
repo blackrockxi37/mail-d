@@ -1,0 +1,1 @@
+nohup python ./mail-d/main.py 0 &
