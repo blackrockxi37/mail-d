@@ -92,7 +92,7 @@ def sendMail(mail, file= False):
 
 
 def ThreadMailReader():
-    global flag , notyflag
+    global flag , notyflag , getMail_status
     count = 0
     while flag:
         try:
@@ -102,14 +102,16 @@ def ThreadMailReader():
         except Exception as e:
             bot.send_message(chat_id= 316009566, text = str(e), disable_notification=notyflag)
             notyflag = False
+            getMail_status = 1
         time.sleep(60)
         
 
 
 @bot.message_handler()
 def messahe_handler(message):
+    global getMail_status
     if message.chat.id == 316009566:
-        bot.send_message(316009566, "Работает.")
+        bot.send_message(316009566, f"Работает. getMail статус = {getMail_status}")
         print(message.from_user.username, ", ", message.chat.id, " : ", message.text.strip())
 
 t1 = threading.Thread(target=ThreadMailReader, daemon=True)
