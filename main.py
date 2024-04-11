@@ -91,7 +91,7 @@ def sendMail(mail, file= False):
 
 
 def ThreadMailReader():
-    global flag
+    global flag , notyflag
     count = 0
     while flag:
         try:
