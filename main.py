@@ -12,7 +12,11 @@ import sys
 #tocken, group chat id and mine chat id
 chatid = -1001851749239 
 rockxi = 316009566
-prodtype = sys.argv[1]
+
+prodtype = '0'
+if len(sys.argv) > 1:
+    prodtype = sys.argv[1]
+    
 
 
 
@@ -32,8 +36,9 @@ bot = tg.TeleBot(token)
 imap = imaplib.IMAP4_SSL(imap_server)
 imap.login(username, mail_pass)
 
-if prodtype == '1':
+if prodtype != '0':
     chatid = rockxi
+    bot.send_message(rockxi, f'Prodtype: {prodtype}')
 
 
 #main function that check email and send last mail to tg group
