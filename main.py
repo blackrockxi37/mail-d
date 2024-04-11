@@ -27,7 +27,7 @@ getMail_status = 0
 bot = tg.TeleBot(token)
 imap = imaplib.IMAP4_SSL(imap_server)
 imap.login(username, mail_pass)
-f = open('times.txt', 'r+')
+
 
 
 #main function that check email and send last mail to tg group
@@ -61,7 +61,8 @@ def getMail():
         if str(letter_from) == b:
             # banned robot mail bitch !_!
             return "Уведомление от mail.ru."
-    
+        
+    f = open('times.txt', 'r+')
     for part in msg.walk():
         content_disposition = str(part.get("Content-Disposition"))
         if part.get_content_maintype() == 'text' and part.get_content_subtype() == 'plain':
