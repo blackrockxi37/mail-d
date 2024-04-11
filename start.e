@@ -1,1 +1,1 @@
-nohup python ./main.py 0 &
+nohup python ./main.py > /dev/null 2>&1 & echo $! > run.pid
