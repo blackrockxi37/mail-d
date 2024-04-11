@@ -12,6 +12,9 @@ import os
 #tocken, group chat id and mine chat id
 chatid = -1001851749239 
 rockxi = 316009566
+
+chatid = rockxi
+
 token = '7186213219:AAFgSnkq1lDpUeyKVOZjl_PuRTScOWlaVhg'
 mail_pass = "3jG402P7cqVd587Fdv1L"
 username = "pi23-2b@mail.ru"
@@ -145,7 +148,7 @@ try:
     bot.polling()
 
 except KeyboardInterrupt:
-    
+
     print("Ctrl + С")
     flag = False
 
