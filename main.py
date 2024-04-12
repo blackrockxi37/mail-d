@@ -8,6 +8,7 @@ import threading
 import time
 import os
 import sys
+from requests.exceptions import RequestException
 
 #tocken, group chat id and mine chat id
 chatid = -1001851749239 
@@ -149,14 +150,14 @@ def messahe_handler(message):
 t1 = threading.Thread(target=ThreadMailReader, daemon=True)
 t1.start() 
 
+while True:
+    try:
+        print("Нажмите Ctrl + С чтобы выйти.")
+        bot.infinity_polling()
+    except RequestException as re:
+        print(re)
+        print("Trying to reconnect...")
+        time.sleep(30)
+        print('Reconnecting.')
 
-try:
-
-    print("Нажмите Ctrl + С чтобы выйти.")
-    bot.polling()
-
-except KeyboardInterrupt:
-
-    print("Ctrl + С")
-    flag = False
 
