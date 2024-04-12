@@ -118,7 +118,7 @@ def sendMail(mail, file= False):
     if file:
         print('отправляю файл...')
         f = open(file, 'rb')
-        bot.send_document(chatid, f)
+        bot.send_document(chatid, f, timeout=120)
     return 0
 
 
@@ -153,11 +153,16 @@ t1.start()
 while True:
     try:
         print("Нажмите Ctrl + С чтобы выйти.")
-        bot.infinity_polling()
-    except RequestException as re:
-        print(re)
+        bot.polling()
+    except KeyboardInterrupt:
+        print('Ctrl + C')
+        break
+    except Exception as ex:
+        print("kb int")
+        print(ex)
         print("Trying to reconnect...")
         time.sleep(30)
         print('Reconnecting.')
+        break
 
 
