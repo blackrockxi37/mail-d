@@ -118,7 +118,7 @@ def sendMail(mail, file= False):
     if file:
         print('отправляю файл...')
         f = open(file, 'rb')
-        bot.send_document(chatid, f, timeout=120)
+        bot.send_document(chatid, f, timeout=200)
     return 0
 
 
@@ -150,19 +150,12 @@ def messahe_handler(message):
 t1 = threading.Thread(target=ThreadMailReader, daemon=True)
 t1.start() 
 
-while True:
-    try:
-        print("Нажмите Ctrl + С чтобы выйти.")
-        bot.polling()
-    except KeyboardInterrupt:
-        print('Ctrl + C')
-        break
-    except Exception as ex:
-        print("kb int")
-        print(ex)
-        print("Trying to reconnect...")
-        time.sleep(30)
-        print('Reconnecting.')
-        break
 
+try:
+    print("Нажмите Ctrl + С чтобы выйти.")
+    bot.infinity_polling(20, True)
+except KeyboardInterrupt:
+    flag = False
+    print('Ctrl + C')
+    sys.exit(0)
 
