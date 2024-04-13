@@ -56,7 +56,7 @@ def getMail():
         a = imap.select('INBOX')[1][0]
     except Exception as e:
         getMail_status = 1
-        bot.send_message(rockxi, str(e))
+        bot.send_message(rockxi, 'mail exeption : ' + str(e))
         imap.login(username, mail_pass)
         a = imap.select('INBOX')[1][0]
     
@@ -75,37 +75,33 @@ def getMail():
             return "Уведомление от mail.ru."
         
     f = open('times.txt', 'r+')
+    times = f.readlines()
+    time = email.utils.parsedate_tz(msg["Date"])
+    messagetime = datetime(time[0],time[1],time[2],time[3],time[4],time[5])
+    if str(messagetime) + '\n' in times:
+        return "Нет новых сообщений!"
+    
     for part in msg.walk():
         content_disposition = str(part.get("Content-Disposition"))
         if part.get_content_maintype() == 'text' and part.get_content_subtype() == 'plain':
             string = base64.b64decode(part.get_payload()).decode()
             times = f.readlines()
-            time = email.utils.parsedate_tz(msg["Date"])
-            messagetime = datetime(time[0],time[1],time[2],time[3],time[4],time[5])
-
             if str(messagetime) + '\n' not in times:
                 flagy = True
                 f.write(str(messagetime) + '\n')
                 sendMail(string)
-            else:
-                #funny code >_<
-                return "Нет новых сообщений!"
-            
-
-        if "attachment" in content_disposition:
-            times = f.readlines()
-            if flagy:
-                filename = part.get_filename()
-                if filename:
-                    if "?UTF-8?B?" in filename:
-                        filename = filename.replace("?UTF-8?B?", '')
-                        filename = base64.b64decode(filename).decode()
-                    folder_name = 'mails/' + a
-                    if not os.path.isdir(folder_name):
-                        os.mkdir(folder_name)
-                    filepath = os.path.join(folder_name, filename)
-                    open(filepath, "wb").write(part.get_payload(decode=True))
-                    sendMail('', filepath)
+        if "attachment" in content_disposition and flagy:
+            filename = part.get_filename()
+            if filename:
+                if "?UTF-8?B?" in filename:
+                    filename = filename.replace("?UTF-8?B?", '')
+                    filename = base64.b64decode(filename).decode()
+                folder_name = 'mails/' + a
+                if not os.path.isdir(folder_name):
+                    os.mkdir(folder_name)
+                filepath = os.path.join(folder_name, filename)
+                open(filepath, "wb").write(part.get_payload(decode=True))
+                sendMail('', filepath)
 
     #fine code =)
     return 'Сообщение отработано!'   
@@ -158,4 +154,6 @@ except KeyboardInterrupt:
     flag = False
     print('Ctrl + C')
     sys.exit(0)
+finally:
+    bot.send_message(rockxi, "Я умер...")
 
