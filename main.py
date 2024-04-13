@@ -8,7 +8,6 @@ import threading
 import time
 import os
 import sys
-from requests.exceptions import RequestException
 
 #tocken, group chat id and mine chat id
 chatid = -1001851749239 
