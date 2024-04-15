@@ -129,7 +129,7 @@ def ThreadMailReader():
             bot.send_message(chat_id=rockxi, text = str(e), disable_notification=notyflag)
             notyflag = True
             getMail_status = 1
-        time.sleep(60)
+        time.sleep(300)
         
 
 
