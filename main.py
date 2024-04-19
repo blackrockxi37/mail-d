@@ -8,23 +8,12 @@ import threading
 import time
 import os
 import sys
-
-#tocken, group chat id and mine chat id
-chatid = -1001851749239 
-rockxi = 316009566
+from hiddendata import *
 
 prodtype = '0'
 if len(sys.argv) > 1:
     prodtype = sys.argv[1]
-    
 
-
-
-token = '7186213219:AAFgSnkq1lDpUeyKVOZjl_PuRTScOWlaVhg'
-mail_pass = "3jG402P7cqVd587Fdv1L"
-username = "pi23-2b@mail.ru"
-imap_server = "imap.mail.ru"
-blacklist = ["<info@e.mail.ru>", "<security@id.mail.ru>" , "<robot@mlrmr.com>"]
 
 #some global flags
 flag = True
@@ -139,6 +128,7 @@ def messahe_handler(message):
     if message.chat.id == rockxi:
         bot.send_message(rockxi, f"Работает.\ngetMail()_status = {getMail_status}")
         print(message.from_user.username, ", ", message.chat.id, " : ", message.text.strip())
+
 
 
 

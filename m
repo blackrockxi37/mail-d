@@ -1,2 +1,2 @@
 bash start.bash
-    bash t
+bash t
