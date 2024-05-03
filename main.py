@@ -103,6 +103,7 @@ def sendMail(mail, file= False):
         print('отправляю файл...')
         f = open(file, 'rb')
         bot.send_document(chatid, f, timeout=200)
+        os.remove(file)
     return 0
 
 
