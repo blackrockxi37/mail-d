@@ -127,7 +127,8 @@ def messahe_handler(message):
     global getMail_status
     if message.chat.id == rockxi:
         if message.text.strip() == 'Reboot':
-            os.execv(sys.argv[0], sys.argv)
+            bot.send_message(rockxi, 'Rebooting...')
+            os.execv(sys.executable, ['python'] + sys.argv)
         bot.send_message(rockxi, f"Работает.\ngetMail()_status = {getMail_status}")
         print(message.from_user.username, ", ", message.chat.id, " : ", message.text.strip())
 
