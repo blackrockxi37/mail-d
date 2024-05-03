@@ -28,7 +28,8 @@ imap.login(username, mail_pass)
 if prodtype != '0':
     chatid = rockxi
     bot.send_message(rockxi, f'Prodtype: {prodtype}')
-
+else:
+    bot.send_message(rockxi, 'Запустился.')
 
 #main function that check email and send last mail to tg group
 #
