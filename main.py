@@ -120,6 +120,8 @@ def ThreadMailReader():
             bot.send_message(chat_id=rockxi, text = str(e), disable_notification=notyflag)
             notyflag = True
             getMail_status = 1
+            bot.send_message(rockxi, 'Rebooting...')
+            os.execv(sys.executable, ['python'] + sys.argv)
         time.sleep(300)
         
 
