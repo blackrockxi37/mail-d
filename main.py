@@ -128,9 +128,14 @@ def ThreadMailReader():
 def messahe_handler(message):
     global getMail_status
     if message.chat.id == rockxi:
+        if message.text.strip() == 'R':
+            time.sleep(15)
+            restart()
         bot.send_message(rockxi, f"Работает.\ngetMail()_status = {getMail_status}")
         print(message.from_user.username, ", ", message.chat.id, " : ", message.text.strip())
 
+def restart():
+    os.execv(sys.executable, ['python'] + sys.argv)
 
 
 
