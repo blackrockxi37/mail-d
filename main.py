@@ -39,19 +39,13 @@ else:
 def getMail():
     flagy = False
     global getMail_status
-    files = []
-
-    #try:
     a = imap.select('INBOX')[1][0]
-    #except Exception as e:
-    #    getMail_status = 1
-    #    bot.send_message(rockxi, 'mail exeption : ' + str(e))
-    #    imap.login(username, mail_pass)
-    #    a = imap.select('INBOX')[1][0]
-    
     a = str(int(a) - 0)
     res, msg = imap.fetch(a, '(RFC822)')
+    if res != 'OK':
+        bot.send_message(rockxi, 'Result is not OK...')
     msg = email.message_from_bytes(msg[0][1])
+    
     subject, encoding = decode_header(msg["Subject"])[0]
     if isinstance(subject, bytes):
         subject = subject.decode(encoding)
@@ -62,7 +56,7 @@ def getMail():
         if str(letter_from) == b:
             # banned robot mail bitch !_!
             return "Уведомление от mail.ru."
-        
+    letter_from = letter_from.replace('<', '').replace('>','')
     f = open('times.txt', 'r+')
     times = f.readlines()
     time = email.utils.parsedate_tz(msg["Date"])
@@ -74,11 +68,12 @@ def getMail():
         content_disposition = str(part.get("Content-Disposition"))
         if part.get_content_maintype() == 'text' and part.get_content_subtype() == 'plain':
             string = base64.b64decode(part.get_payload()).decode()
+            
             times = f.readlines()
             if str(messagetime) + '\n' not in times:
                 flagy = True
                 f.write(str(messagetime) + '\n')
-                sendMail(string)
+                sendMail(letter_from + '\n' + string)
         if "attachment" in content_disposition and flagy:
             filename = part.get_filename()
             if filename:
@@ -129,11 +124,19 @@ def ThreadMailReader():
 @bot.message_handler()
 def messahe_handler(message):
     global getMail_status
+    text = message.text.strip() 
     if message.chat.id == rockxi:
-        if message.text.strip() == 'R':
+        if text == 'R':
             time.sleep(15)
             restart()
-        bot.send_message(rockxi, f"Работает.\ngetMail()_status = {getMail_status}")
+        if text == '?':
+            status, responce = imap.noop()
+            if status == 'OK':
+                bot.send_message(rockxi, 'IMAP is Logined.')
+            else:
+                bot.send_message(rockxi, 'Failed. IMAP is NOT Logined. Invalid. Suka.')
+            return
+        bot.send_message(rockxi, f"Работаю.")
         print(message.from_user.username, ", ", message.chat.id, " : ", message.text.strip())
 
 def restart():
