@@ -39,15 +39,15 @@ else:
 def getMail():
     flagy = False
     global getMail_status
-    
+    files = []
 
-    try:
-        a = imap.select('INBOX')[1][0]
-    except Exception as e:
-        getMail_status = 1
-        bot.send_message(rockxi, 'mail exeption : ' + str(e))
-        imap.login(username, mail_pass)
-        a = imap.select('INBOX')[1][0]
+    #try:
+    a = imap.select('INBOX')[1][0]
+    #except Exception as e:
+    #    getMail_status = 1
+    #    bot.send_message(rockxi, 'mail exeption : ' + str(e))
+    #    imap.login(username, mail_pass)
+    #    a = imap.select('INBOX')[1][0]
     
     a = str(int(a) - 0)
     res, msg = imap.fetch(a, '(RFC822)')
@@ -90,13 +90,14 @@ def getMail():
                     os.mkdir(folder_name)
                 filepath = os.path.join(folder_name, filename)
                 open(filepath, "wb").write(part.get_payload(decode=True))
-                sendMail('', filepath)
+                sendMail(file = filepath)
+                os.remove(filepath)
 
-    #fine code =)
+    
     return 'Сообщение отработано!'   
 
 
-def sendMail(mail, file= False):
+def sendMail(mail = '', file=False):
     if not file:
         bot.send_message(chat_id = chatid, text = mail)
         print('отправляю сообщение...')
@@ -104,7 +105,7 @@ def sendMail(mail, file= False):
         print('отправляю файл...')
         f = open(file, 'rb')
         bot.send_document(chatid, f, timeout=200)
-        os.remove(file)
+        time.sleep(5)
     return 0
 
 
