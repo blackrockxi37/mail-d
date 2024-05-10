@@ -44,6 +44,8 @@ def getMail():
     res, msg = imap.fetch(a, '(RFC822)')
     if res != 'OK':
         bot.send_message(rockxi, 'Result is not OK...')
+        imap.login(username, mail_pass)
+        return 'Trying to reconnect...'
     msg = email.message_from_bytes(msg[0][1])
     
     subject, encoding = decode_header(msg["Subject"])[0]
