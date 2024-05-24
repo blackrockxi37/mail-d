@@ -18,7 +18,7 @@ if len(sys.argv) > 1:
 #some global flags
 flag = True
 notyflag = False
-getMail_status = 0
+
 
 #telegram bot and imap connection 
 bot = tg.TeleBot(token)
@@ -37,11 +37,14 @@ else:
 #
 #
 def getMail():
+
     flagy = False
-    global getMail_status
+
     a = imap.select('INBOX')[1][0]
     a = str(int(a) - 0)
+
     res, msg = imap.fetch(a, '(RFC822)')
+
     if res != 'OK':
         bot.send_message(rockxi, 'Result is not OK...')
         imap.login(username, mail_pass)
@@ -59,10 +62,12 @@ def getMail():
             # banned robot mail bitch !_!
             return "Уведомление от mail.ru."
     letter_from = letter_from.replace('<', '').replace('>','')
+
     f = open('times.txt', 'r+')
     times = f.readlines()
     time = email.utils.parsedate_tz(msg["Date"])
     messagetime = datetime(time[0],time[1],time[2],time[3],time[4],time[5])
+
     if str(messagetime) + '\n' in times:
         return "Нет новых сообщений!"
     
@@ -77,7 +82,9 @@ def getMail():
                 f.write(str(messagetime) + '\n')
                 sendMail(letter_from + '\n' + string)
         if "attachment" in content_disposition and flagy:
+
             filename = part.get_filename()
+            
             if filename:
                 if "?UTF-8?B?" in filename:
                     filename = filename.replace("?UTF-8?B?", '')
@@ -90,35 +97,42 @@ def getMail():
                 sendMail(file = filepath)
                 os.remove(filepath)
 
-    
+
     return 'Сообщение отработано!'   
 
 
 def sendMail(mail = '', file=False):
+
     if not file:
         bot.send_message(chat_id = chatid, text = mail)
         print('отправляю сообщение...')
+
     if file:
         print('отправляю файл...')
         f = open(file, 'rb')
         bot.send_document(chatid, f, timeout=200)
         time.sleep(5)
+    
     return 0
 
 
 def ThreadMailReader():
+    imap.noop()
     global flag , notyflag , getMail_status
     count = 0
+
     while flag:
         try:
             count += 1
             a = getMail()
             print(f'<{count}> --> , {a}')
+            
         except Exception as e:
             bot.send_message(chat_id=rockxi, text = str(e), disable_notification=notyflag)
             notyflag = True
             getMail_status = 1
             restart()
+        
         time.sleep(500)
         
 
