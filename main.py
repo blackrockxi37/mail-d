@@ -28,6 +28,8 @@ imap.login(username, mail_pass)
 if prodtype != '0':
     chatid = rockxi
     bot.send_message(rockxi, f'Prodtype: {prodtype}')
+elif prodtype == '3':
+    pass
 else:
     bot.send_message(rockxi, 'Запустился.')
 
@@ -131,7 +133,7 @@ def ThreadMailReader():
             
         except Exception as e:
             if (str(e) == 'command: SELECT => session timeout'):
-                restart()
+                restart(['3'])
             bot.send_message(chat_id=rockxi, text = str(e), disable_notification=notyflag)
             notyflag = True
             getMail_status = 1
@@ -159,8 +161,11 @@ def messahe_handler(message):
         bot.send_message(rockxi, f"Работаю.")
         print(message.from_user.username, ", ", message.chat.id, " : ", message.text.strip())
 
-def restart():
-    os.execv(sys.executable, ['python'] + sys.argv)
+def restart(args = False):
+    if not args:
+        os.execv(sys.executable, ['python'] + sys.argv)
+    else:
+        os.execv(sys.executable, ['python'] + args)
 
 
 
