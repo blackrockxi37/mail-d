@@ -117,7 +117,9 @@ def sendMail(mail = '', file=False):
 
 
 def ThreadMailReader():
-    imap.noop()
+    status, responce = imap.noop()
+    if status != 'OK':
+        bot.semd_message(rockxi, str(status) +'   '+ str(responce))
     global flag , notyflag , getMail_status
     count = 0
 
@@ -128,6 +130,8 @@ def ThreadMailReader():
             print(f'<{count}> --> , {a}')
             
         except Exception as e:
+            if (str(e) == 'command: SELECT => session timeout'):
+                restart()
             bot.send_message(chat_id=rockxi, text = str(e), disable_notification=notyflag)
             notyflag = True
             getMail_status = 1
