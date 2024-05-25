@@ -25,11 +25,11 @@ bot = tg.TeleBot(token)
 imap = imaplib.IMAP4_SSL(imap_server)
 imap.login(username, mail_pass)
 
-if prodtype != '0':
+if prodtype == '3':
+    pass
+elif prodtype == '1':
     chatid = rockxi
     bot.send_message(rockxi, f'Prodtype: {prodtype}')
-elif prodtype == '3':
-    pass
 else:
     bot.send_message(rockxi, 'Запустился.')
 
