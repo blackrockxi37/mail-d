@@ -165,7 +165,7 @@ def restart(args = False):
     if not args:
         os.execv(sys.executable, ['python'] + sys.argv)
     else:
-        os.execv(sys.executable, ['python'] + args)
+        os.execv(sys.executable, ['python'] + sys.argv + args)
 
 
 
