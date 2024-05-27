@@ -26,7 +26,7 @@ imap = imaplib.IMAP4_SSL(imap_server)
 imap.login(username, mail_pass)
 
 if prodtype == '3':
-    pass
+    bot.send_message(rockxi, '3')
 elif prodtype == '1':
     chatid = rockxi
     bot.send_message(rockxi, f'Prodtype: {prodtype}')
