@@ -133,7 +133,7 @@ def ThreadMailReader():
             
         except Exception as e:
             if (str(e) == 'command: SELECT => session timeout'):
-                restart(['3'])
+                restart()
             bot.send_message(chat_id=rockxi, text = str(e), disable_notification=notyflag)
             notyflag = True
             getMail_status = 1
@@ -161,11 +161,8 @@ def messahe_handler(message):
         bot.send_message(rockxi, f"Работаю.")
         print(message.from_user.username, ", ", message.chat.id, " : ", message.text.strip())
 
-def restart(args = False):
-    if not args:
-        os.execv(sys.executable, ['python'] + sys.argv)
-    else:
-        os.execv(sys.executable, ['python'] + sys.argv + args)
+def restart():
+    os.execv(sys.executable, ['python'] + sys.argv)
 
 
 
