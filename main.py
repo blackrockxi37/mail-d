@@ -162,7 +162,7 @@ def messahe_handler(message):
         print(message.from_user.username, ", ", message.chat.id, " : ", message.text.strip())
 
 def restart():
-    os.execv(sys.executable, ['python'] + sys.argv)
+    os.execv(sys.executable, ['python'] + sys.argv + ['3'])
 
 
 
