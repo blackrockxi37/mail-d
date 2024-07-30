@@ -1,1 +1,0 @@
-kill -9 $(cat ~/mail-d/run.pid)
