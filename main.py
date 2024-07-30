@@ -10,10 +10,6 @@ import os
 import sys
 from hiddendata import *
 
-prodtype = '0'
-if len(sys.argv) > 1:
-    prodtype = sys.argv[1]
-
 
 #some global flags
 flag = True
@@ -24,14 +20,6 @@ notyflag = False
 bot = tg.TeleBot(token)
 imap = imaplib.IMAP4_SSL(imap_server)
 imap.login(username, mail_pass)
-
-if prodtype == '3':
-    pass
-elif prodtype == '1':
-    chatid = rockxi
-    bot.send_message(rockxi, f'Prodtype: {prodtype}')
-else:
-    bot.send_message(rockxi, 'Запустился.')
 
 #main function that check email and send last mail to tg group
 #
