@@ -72,9 +72,7 @@ def getMail():
                 f.write(str(messagetime) + '\n')
                 sendMail(letter_from + '\n' + string)
         if "attachment" in content_disposition and flagy:
-
             filename = part.get_filename()
-            
             if filename:
                 if "?UTF-8?B?" in filename:
                     filename = filename.replace("?UTF-8?B?", '')
@@ -82,7 +80,8 @@ def getMail():
                 folder_name = 'mails/' + a
                 if not os.path.isdir(folder_name):
                     os.mkdir(folder_name)
-                filepath = os.path.join(folder_name, filename)
+                filename_format = filename.split('.')[-1]
+                filepath = os.path.join(folder_name, 'file.'+filename_format, )
                 open(filepath, "wb").write(part.get_payload(decode=True))
                 sendMail(file = filepath)
                 os.remove(filepath)
