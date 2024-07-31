@@ -9,6 +9,7 @@ import time
 import os
 import sys
 from hiddendata import *
+from get_file_extension import get_file_extension
 
 
 #some global flags
@@ -80,7 +81,7 @@ def getMail():
                 folder_name = 'mails/' + a
                 if not os.path.isdir(folder_name):
                     os.mkdir(folder_name)
-                filename_format = filename.split('.')[-1]
+                filename_format=get_file_extension(filename)
                 filepath = os.path.join(folder_name, 'file.'+filename_format, )
                 open(filepath, "wb").write(part.get_payload(decode=True))
                 sendMail(file = filepath)
