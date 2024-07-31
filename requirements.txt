@@ -1,2 +1,2 @@
 telebot
-magic
+python-magic
