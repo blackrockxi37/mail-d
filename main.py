@@ -116,18 +116,16 @@ def ThreadMailReader():
     count = 0
 
     while flag:
-        try:
-            count += 1
-            a = getMail()
-            print(f'<{count}> --> , {a}')
+        count += 1
+        a = getMail()
+        print(f'<{count}> --> , {a}')
             
-        except Exception as e:
-            if (str(e) == 'command: SELECT => session timeout'):
-                restart()
-            bot.send_message(chat_id=rockxi, text = str(e), disable_notification=notyflag)
-            notyflag = True
-            getMail_status = 1
-            restart()
+        if (str(e) == 'command: SELECT => session timeout'):
+             restart()
+        bot.send_message(chat_id=rockxi, text = str(e), disable_notification=notyflag)
+        notyflag = True
+        getMail_status = 1
+        restart()
         
         time.sleep(500)
         
