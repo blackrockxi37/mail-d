@@ -9,6 +9,8 @@ import time
 import os
 import sys
 from hiddendata import *
+import magic
+
 def get_file_extencion(file_path):
     mime = magic.Magic(mime=True)
     mime_type = mime.from_file(file_path)
