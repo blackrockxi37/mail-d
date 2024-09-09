@@ -10,7 +10,6 @@ import os
 import sys
 from hiddendata import *
 def get_file_extencion(file_path):
-# Используем magic для определения MIME-типа файла
     mime = magic.Magic(mime=True)
     mime_type = mime.from_file(file_path)
     
