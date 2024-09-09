@@ -2,7 +2,10 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-RUN apk add libffi-dev
+RUN apk add --update --no-cache --virtual .tmp-build-deps \
+    gcc libc-dev linux-headers postgresql-dev
+
+RUN pip3 install --upgrade pip && pip3 install -r /requirements.txt
 
 COPY . .
 
