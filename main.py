@@ -9,7 +9,12 @@ import time
 import os
 import sys
 from hiddendata import *
-from get_file_extension import get_file_extension
+def get_file_extencion(file_path):
+    # Получаем расширение файла
+    _, extension = os.path.splitext(file_path)
+    
+    # Возвращаем расширение с двоеточием
+    return f"{extension}:"
 
 
 #some global flags
