@@ -24,7 +24,7 @@ def get_file_extension(file_path):
     elif 'image/jpeg' in mime_type:
         return ".jpg"
     else:
-        return ".unknown:"
+        return ".unknown"
 
 #some global flags
 flag = True
