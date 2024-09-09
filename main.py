@@ -14,17 +14,15 @@ import magic
 def get_file_extension(file_path):
     mime = magic.Magic(mime=True)
     mime_type = mime.from_file(file_path)
-    
     # Преобразуем MIME-тип в формат расширения файла
     if 'application/pdf' in mime_type:
-        return ".pdf:"
+        return ".pdf"
     elif 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' in mime_type:
-        return ".docx:"
+        return ".docx"
     elif 'text/plain' in mime_type:
-        return ".txt:"
+        return ".txt"
     elif 'image/jpeg' in mime_type:
-        return ".jpg:"
-    # Добавьте другие MIME-типы и расширения по мере необходимости
+        return ".jpg"
     else:
         return ".unknown:"
 
