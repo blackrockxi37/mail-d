@@ -10,12 +10,22 @@ import os
 import sys
 from hiddendata import *
 def get_file_extencion(file_path):
-    # Получаем расширение файла
-    _, extension = os.path.splitext(file_path)
+# Используем magic для определения MIME-типа файла
+    mime = magic.Magic(mime=True)
+    mime_type = mime.from_file(file_path)
     
-    # Возвращаем расширение с двоеточием
-    return f"{extension}:"
-
+    # Преобразуем MIME-тип в формат расширения файла
+    if 'application/pdf' in mime_type:
+        return ".pdf:"
+    elif 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' in mime_type:
+        return ".docx:"
+    elif 'text/plain' in mime_type:
+        return ".txt:"
+    elif 'image/jpeg' in mime_type:
+        return ".jpg:"
+    # Добавьте другие MIME-типы и расширения по мере необходимости
+    else:
+        return ".unknown:"
 
 #some global flags
 flag = True
