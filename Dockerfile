@@ -1,12 +1,9 @@
 FROM python:3.9-slim
 
-# Обновляем пакеты и устанавливаем зависимости, включая libffi-dev
-RUN apt-get update && apt-get install -y \
-    gcc libc-dev linux-headers libffi-dev postgresql-dev \
-    && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
 
-# Устанавливаем Python пакеты
-RUN pip install --upgrade pip && pip install --no-cache-dir -r /requirements.txt
+COPY . .
 
-# Команда по умолчанию
+RUN pip install --no-cache-dir -r requirements.txt
+
 CMD ["python", "main.py"]
