@@ -1,2 +1,3 @@
 telebot
-magic
+python-magic
+python-libmagic
