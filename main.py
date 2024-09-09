@@ -9,22 +9,10 @@ import time
 import os
 import sys
 from hiddendata import *
-import magic
 
 def get_file_extension(file_path):
-    mime = magic.Magic(mime=True)
-    mime_type = mime.from_file(file_path)
-    # Преобразуем MIME-тип в формат расширения файла
-    if 'application/pdf' in mime_type:
-        return ".pdf"
-    elif 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' in mime_type:
-        return ".docx"
-    elif 'text/plain' in mime_type:
-        return ".txt"
-    elif 'image/jpeg' in mime_type:
-        return ".jpg"
-    else:
-        return ".unknown"
+    _, ext = os.path.splitext(file_path)
+    return ext.lower()
 
 #some global flags
 flag = True
