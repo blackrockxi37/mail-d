@@ -38,7 +38,7 @@ Mail-D — это Python-программа для отправки сообще
 5. Запустите контейнер Docker:
 
     ```bash
-    docker run -p 3000:3000 --restart always mail-d
+    docker run -d -p 3000:3000 --restart always mail-d
     ```
 
 ## Настройка
