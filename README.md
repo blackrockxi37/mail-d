@@ -51,8 +51,9 @@ docker stop id_контейнера
 
 ## Лицензия
 
-Этот проект лицензируется под MIT License - подробности см. в [LICENSE](LICENSE).
+Этот проект лицензируется под noLicense - подробности см. в [LICENSE](LICENSE).
 
 ## Контакты
 
-Если у вас возникли вопросы или предложения, не стесняйтесь обращаться к разработчику через [GitHub Issues](https://github.com/blackrockxi37/mail-d/issues).
+Если у вас возникли вопросы или предложения, не стесняйтесь обращаться через [GitHub Issues](https://github.com/blackrockxi37/mail-d/issues).  
+Телеграм автора: [rockxi](https://t.me/rockxi)
