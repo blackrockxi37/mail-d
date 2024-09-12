@@ -4,52 +4,30 @@ Mail-D — это Python-программа для отправки сообще
 
 ## Установка
 
-1. Клонируйте репозиторий:
+1. Инструкция по установке: скопируй и вставь в терминал, далее следуем указаниям. Для работы приложения у вас уже должен быть установлен docker.
 
     ```bash
     git clone https://github.com/blackrockxi37/mail-d
-    ```
-
-2. Перейдите в каталог проекта:
-
-    ```bash
     cd mail-d
+    sh build.sh
     ```
-
-3. Создайте файл `hiddendata.py` и добавьте в него следующие строки:
-
-    ```python
-    token = 'telegramtoken' 
-    mail_pass = "imappassword" 
-    username = "pi23-2b@mail.ru" 
-    imap_server = "imap.mail.ru"
-    chatid = 'id чата в телеграме' 
-    rockxi = 'id администратора бота'
-    
-    blacklist = [ "<info@e.mail.ru>", "<security@id.mail.ru>", "<robot@mlrmr.com>" ]
-    ```
-
-4. Постройте Docker-образ:
-
-    ```bash
-    docker build -t mail-d .
-    ```
-
-5. Запустите контейнер Docker:
-
-    ```bash
-    docker run -d --restart always mail-d
-    ```
+Так же, для использования вам пригодятся следующие значения:
 
 ## Настройка
 
-- **token**: Токен вашего бота Telegram, который вы можете получить у BotFather.
-- **mail_pass**: Пароль для доступа к вашей почте (используется для IMAP).
 - **username**: Ваш адрес электронной почты.
+- **mail_pass**: Пароль для доступа к вашей почте (используется для IMAP).
 - **imap_server**: IMAP сервер вашей почтовой службы.
 - **chatid**: ID чата в Telegram, куда будут отправляться сообщения.
 - **rockxi**: ID администратора бота для управления.
-- **blacklist**: Список адресов электронной почты, которые следует игнорировать.
+- **token**: Токен вашего бота Telegram, который вы можете получить у BotFather. 
+
+2. Постройте Docker-образ и запустите его:
+
+    ```bash
+    docker build -t mail-d .
+    docker run -d --restart always mail-d
+    ```
 
 ## Использование
 
