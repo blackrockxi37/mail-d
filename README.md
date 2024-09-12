@@ -56,4 +56,4 @@ docker stop id_контейнера
 ## Контакты
 
 Если у вас возникли вопросы или предложения, не стесняйтесь обращаться через [GitHub Issues](https://github.com/blackrockxi37/mail-d/issues).  
-Телеграм автора: [rockxi](https://t.me/rockxi)
+Телеграм автора: [rockxi](https://t.me/rockxi).
