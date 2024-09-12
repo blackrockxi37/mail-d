@@ -9,10 +9,7 @@ import time
 import os
 import sys
 from hiddendata import *
-
-def get_file_extension(file_path):
-    _, ext = os.path.splitext(file_path)
-    return ext.lower()
+from lastmail import get_lastmail, get_new_number
 
 #some global flags
 flag = True
@@ -24,30 +21,12 @@ bot = tg.TeleBot(token)
 imap = imaplib.IMAP4_SSL(imap_server)
 imap.login(username, mail_pass)
 
-#main function that check email and send last mail to tg group
-#
-#try - except construction is using for catch logout exception
-#
-#
 def getMail():
-
-    flagy = False
-
-    a = imap.select('INBOX')[1][0]
-    a = str(int(a) - 0)
-
-    res, msg = imap.fetch(a, '(RFC822)')
-
-    if res != 'OK':
-        bot.send_message(rockxi, 'Result is not OK...')
-        imap.login(username, mail_pass)
-        return 'Trying to reconnect...'
+    res, msg = get_lastmail(imap)
     msg = email.message_from_bytes(msg[0][1])
-    
     subject, encoding = decode_header(msg["Subject"])[0]
     if isinstance(subject, bytes):
         subject = subject.decode(encoding)
-
     letter_from = msg["Return-path"]
     # blacklist email's check
     for b in blacklist:
@@ -80,11 +59,10 @@ def getMail():
                 if "?UTF-8?B?" in filename:
                     filename = filename.replace("?UTF-8?B?", '')
                     filename = base64.b64decode(filename).decode()
-                folder_name = 'mails/' + a
+                folder_name = 'mails/' + get_new_number()
                 if not os.path.isdir(folder_name):
                     os.mkdir(folder_name) 
-                filename_format = get_file_extension(filename)
-                filepath = os.path.join(folder_name, 'file.'+filename_format, )
+                filepath = os.path.join(folder_name, 'file.'+filename, )
                 open(filepath, "wb").write(part.get_payload(decode=True))
                 sendMail(file = filepath)
                 os.remove(filepath)
@@ -119,13 +97,6 @@ def ThreadMailReader():
         count += 1
         a = getMail()
         print(f'<{count}> --> , {a}')
-            
-        if (str(e) == 'command: SELECT => session timeout'):
-             restart()
-        bot.send_message(chat_id=rockxi, text = str(e), disable_notification=notyflag)
-        notyflag = True
-        getMail_status = 1
-        restart()
         
         time.sleep(500)
         
