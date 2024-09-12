@@ -20,8 +20,8 @@ blacklist = [ "<info@e.mail.ru>", "<security@id.mail.ru>" , "<robot@mlrmr.com>" 
 # blacklist, письма из ящиков, содержащихся в этом массиве не будут пересылаться (не забудь про <> вокруг ящика)
 EOL
 
-echo "Данные успешно записаны в hiddendata.py. Теперь соберите docker - контейнер с помощью\n:
-        docker build -t mail-d
-        И запустите с помощью:
+echo "Данные успешно записаны в hiddendata.py. Теперь соберите docker - контейнер с помощью:\n
+        docker build -t mail-d\n
+        И запустите с помощью:\n
         docker run -d --restart always mail-d\n
         Чтобы посмотреть ошибки, запусти контейнер без ключа -d"
