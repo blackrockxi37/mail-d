@@ -19,7 +19,7 @@ Mail-D — это Python-программа для отправки сообще
 3. Создайте файл `hiddendata.py` и добавьте в него следующие строки:
 
     ```python
-    token = 'telegramtocken' 
+    token = 'telegramtoken' 
     mail_pass = "imappassword" 
     username = "pi23-2b@mail.ru" 
     imap_server = "imap.mail.ru"
