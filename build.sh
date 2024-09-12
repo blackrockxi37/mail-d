@@ -1,8 +1,8 @@
 #!/bin/bash
-echo "U vas doljen bit' ustanovlen docker"
+echo "Установите предварительно docker"
 read -p "Введите IMAP сервер: " imap_server
 read -p "Введите почтовый ящик: " email
-read -s -p "Введите пароль от IMAP: " imap_password
+read -p "Введите пароль от IMAP: " imap_password
 echo 
 
 read -p "Введите chatid: " chatid
@@ -19,4 +19,6 @@ token = "$tg_token"
 blacklist = [ "<info@e.mail.ru>", "<security@id.mail.ru>" , "<robot@mlrmr.com>" ]
 EOL
 
-echo "Данные успешно записаны в hiddendata.py"
+echo "Данные успешно записаны в hiddendata.py. Теперь соберите контейнер с помощью:\n
+        docker build -t mail-d\n
+        docker run -d --restart always mail-d"
