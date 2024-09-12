@@ -27,20 +27,20 @@ sh build.sh
 Постройте Docker-образ и запустите его:
 Чтобы запустить в режиме отладки, а не в фоне, уберите ключ '-d'.
 
-    ```bash
-    docker build -t mail-d .
-    docker run -d --restart always mail-d
-    ```
+```bash
+docker build -t mail-d .
+docker run -d --restart always mail-d
+```
 
 ## Использование
 
 После настройки и запуска контейнера, программа будет автоматически отслеживать новые сообщения в указанном почтовом ящике и пересылать их в Telegram чат. 
 Чтобы остановить выполнение, используйте:
 
-    ```bash
-    docker ps
-    docker stop id_контейнера
-    ```
+```bash
+docker ps
+docker stop id_контейнера
+```
 
 ## Примечания
 
