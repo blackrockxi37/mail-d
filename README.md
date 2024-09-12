@@ -10,7 +10,7 @@ Mail-D — это Python-программа для отправки сообще
 ```bash
 git clone https://github.com/blackrockxi37/mail-d
 cd mail-d
-sh build.sh
+bash build.sh
 ```
 
 Так же, для использования вам пригодятся следующие значения:
