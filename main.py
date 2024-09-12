@@ -62,7 +62,7 @@ def getMail():
                 folder_name = 'mails/' + get_new_number()
                 if not os.path.isdir(folder_name):
                     os.mkdir(folder_name) 
-                filepath = os.path.join(folder_name, 'file.'+filename, )
+                filepath = os.path.join(folder_name, filename, )
                 open(filepath, "wb").write(part.get_payload(decode=True))
                 sendMail(file = filepath)
                 os.remove(filepath)
